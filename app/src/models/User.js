@@ -7,8 +7,7 @@ class User {
     }
 
     login() {
-        const { id, password } = UserStorage.getUsers(this.body.id);
-        
+        const { id, password } = UserStorage.getUserInfo(this.body.id);
         if (id) {
             if (id === this.body.id && password == this.body.password) {
                 return { success: true };
@@ -16,6 +15,10 @@ class User {
             return { success: false, msg: "wrong password" };
         }
         return { success: false, msg: "id not existed" };
+    }
+
+    register() {
+        UserStorage.save(this.body);
     }
 }
 

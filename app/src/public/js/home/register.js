@@ -1,16 +1,22 @@
 const id = document.querySelector("#id"),
+    name = document.querySelector("#name"),
     password = document.querySelector("#password"),
-    loginbtn = document.querySelector("#button");
+    confirmPassword = document.querySelector("#confirm-password"),
+    registerbtn = document.querySelector("#button");
 
-loginbtn.addEventListener("click", login);
+registerbtn.addEventListener("click", register);
 
-function login() {
+function register() {
+    if (!id.value) return alert("enter ID");
+    if (password != confirmPassword) return alert("password not matched");
+
     const req = {
         id: id.value,
+        name: name.value,
         password: password.value,
     };
 
-    fetch("/login", {
+    fetch("/register", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -19,7 +25,7 @@ function login() {
     }).then((res) => res.json())
     .then((res) => {
         if (res.success) {
-            location.href = "/";
+            location.href = "/login";
         } else {
             alert(res.msg);
         }
