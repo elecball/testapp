@@ -8,7 +8,7 @@ registerbtn.addEventListener("click", register);
 
 function register() {
     if (!id.value) return alert("enter ID");
-    if (password != confirmPassword) return alert("password not matched");
+    if (password.value !== confirmPassword.value) return alert("password not matched");
 
     const req = {
         id: id.value,
@@ -30,7 +30,5 @@ function register() {
             alert(res.msg);
         }
     })
-    .catch((err) => {
-        console.error(new Error("error occured"));
-    });
+    .catch(console.error(new Error("error occured")));
 }

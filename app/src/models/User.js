@@ -6,8 +6,8 @@ class User {
         this.body = body;
     }
 
-    login() {
-        const { id, password } = UserStorage.getUserInfo(this.body.id);
+    async login() {
+        const { id, password } = await UserStorage.getUserInfo(this.body.id);
         if (id) {
             if (id === this.body.id && password == this.body.password) {
                 return { success: true };
@@ -17,8 +17,8 @@ class User {
         return { success: false, msg: "id not existed" };
     }
 
-    register() {
-        UserStorage.save(this.body);
+    async register() {
+        return await UserStorage.save(this.body);
     }
 }
 
